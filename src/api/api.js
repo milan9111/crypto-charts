@@ -13,7 +13,7 @@ const instance = axios.create({
 
 export const dataCrypto = {
     getDataAllCrypto(){
-        return instance.get('assets?filter_asset_id=BTC,ETH,BCH,XMR,ZEC,LTC,DASH,DCR,BTG,ETC,NEO,REP,MCO,VEN,OMG,XTZ,LEO,MANA,EOS,LSK,AVT,STRAT,USDT,XRP,0x,DOGE')
+        return instance.get('assets?filter_asset_id=BTC,ETH,BCH,XMR,ZEC,LTC,DASH,DCR,BTG,ETC,NEO,REP,MCO,VEN,OMG,DOGE')
         .then(response => {
             return response.data;
         }); 
@@ -24,6 +24,12 @@ export const dataCrypto = {
             return response.data;
         }); 
     },
+    getLatestData(id) {
+        return instance.get(`ohlcv/BITSTAMP_SPOT_${id}_USD/latest?period_id=1DAYlimit=1`)
+        .then(response => {
+            return response.data;
+        });
+    }
      
 };
 

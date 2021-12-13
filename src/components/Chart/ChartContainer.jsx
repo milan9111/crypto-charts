@@ -10,9 +10,7 @@ import logo from './../../sources/images/logo.jpg';
 
     const [dataCryptoCurrency, setDataCryptoCurrency] = useState([]);
     const [iconCryptoCurrency, setIconCryptoCurrency] = useState([]);
-
-
-    console.log(dataCryptoCurrency);
+    const [latestData, setLatestData] = useState([]);
 
     useEffect(() => {
         dataCrypto.getDataAllCrypto()
@@ -24,12 +22,23 @@ import logo from './../../sources/images/logo.jpg';
     useEffect(() => {
         dataCrypto.getIconAllCrypto()
         .then(data => {
-            setIconCryptoCurrency(data);
+        setIconCryptoCurrency(data);
         }) 
     }, []);
 
      
-
+    const changeDay = (id) => {
+        dataCrypto.getLatestData(id)
+        .then(data => {
+        setLatestData(data);
+        })
+        console.log(latestData);
+        let priceOpen = latestData[0]?.price_open;
+        let priceClose = latestData[0]?.price_close;
+        return (((priceOpen - priceClose) / priceOpen) * 100) * -1; 
+    }
+   
+     
     const selectCryptoCurrency = [];
     dataCryptoCurrency.forEach(item => {
         let cryptocurrency = {};
@@ -51,7 +60,6 @@ import logo from './../../sources/images/logo.jpg';
     });
      
   
-    
     const dataFotTable = [];
     sortPriceCryptoCurrency.forEach(item => {
         let objDataCryptoCurrency = {};
@@ -62,7 +70,7 @@ import logo from './../../sources/images/logo.jpg';
         objDataCryptoCurrency.price = `${item.price.toFixed(3)} $`;
         objDataCryptoCurrency.capitalization = '0000000 $';
         objDataCryptoCurrency.volume = `${item.volume} $`;
-        objDataCryptoCurrency.change = '0000%';
+        objDataCryptoCurrency.change = `${changeDay(item.id)} $`;
         dataFotTable.push(objDataCryptoCurrency);
     });
 
@@ -86,7 +94,7 @@ import logo from './../../sources/images/logo.jpg';
           align: 'center',
         },
         {
-          title: 'Капитализация',
+          title: 'Количество трейдов(24ч.)',
           dataIndex: 'capitalization',
           align: 'center',
         },
