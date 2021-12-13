@@ -2,10 +2,13 @@ import React from "react";
 import Header from "./components/Header/Header";
 import { Row, Col } from 'antd';
 import SideLeft from "./components/Side/SideLeft";
-import Chart from "./components/Chart/Chart";
+import ChartContainer from "./components/Chart/ChartContainer";
 import SideRigth from "./components/Side/SideRigth";
 import Footer from "./components/Footer/Footer";
- 
+
+
+
+
 
 const App = () => {
   return (
@@ -15,9 +18,9 @@ const App = () => {
       </header>
       <main>
           <Row>
-              <Col xl={6} lg={6} md={6} sm={6} xs={6}><SideLeft /></Col>
-              <Col xl={12} lg={12} md={12} sm={12} xs={12}><Chart /></Col>
-              <Col xl={6} lg={6} md={6} sm={6} xs={6}><SideRigth /></Col>
+              <Col xl={5} lg={5} md={5} sm={5} xs={5}><SideLeft /></Col>
+              <Col xl={14} lg={14} md={14} sm={14} xs={14}><ChartContainer /></Col>
+              <Col xl={5} lg={5} md={5} sm={5} xs={5}><SideRigth /></Col>
           </Row>
       </main>
       <footer>
